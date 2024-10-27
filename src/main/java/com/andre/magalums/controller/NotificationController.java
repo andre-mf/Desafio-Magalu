@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/notifications")
 public class NotificationController {
 
     private final NotificationService notificationService;
@@ -35,5 +35,11 @@ public class NotificationController {
         }
 
         return ResponseEntity.ok(notification.get());
+    }
+
+    @DeleteMapping("/{notificationId}")
+    public ResponseEntity<Void> cancelNotification(@PathVariable("notificationId") Long notificationId) {
+        notificationService.cancelNotification(notificationId);
+        return ResponseEntity.noContent().build();
     }
 }

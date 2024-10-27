@@ -2,6 +2,7 @@ package com.andre.magalums.service;
 
 import com.andre.magalums.controller.dto.ScheduleNotificationDto;
 import com.andre.magalums.entity.Notification;
+import com.andre.magalums.entity.Status;
 import com.andre.magalums.repository.NotificationRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,14 @@ public class NotificationService {
 
     public Optional<Notification> findById(Long id) {
         return notificationRepository.findById(id);
+    }
+
+    public void cancelNotification(Long notificationId) {
+        var notification = notificationRepository.findById(notificationId);
+
+        if (notification.isPresent()) {
+            notification.get().setStatus(Status.Values.CANCELLED.toStatus());
+            notificationRepository.save(notification.get());
+        }
     }
 }
