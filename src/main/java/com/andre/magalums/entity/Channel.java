@@ -1,5 +1,6 @@
 package com.andre.magalums.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -49,6 +50,11 @@ public class Channel {
         Values(Long id, String description) {
             this.id = id;
             this.description = description;
+        }
+
+        @JsonCreator
+        public static Channel.Values forValues(String value) {
+            return Channel.Values.valueOf(value.toUpperCase());
         }
 
         public Channel toChannel() {

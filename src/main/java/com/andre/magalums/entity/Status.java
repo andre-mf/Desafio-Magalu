@@ -1,5 +1,6 @@
 package com.andre.magalums.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -49,6 +50,11 @@ public class Status {
         Values(Long id, String description) {
             this.id = id;
             this.description = description;
+        }
+
+        @JsonCreator
+        public static Status.Values forValues(String value) {
+            return Status.Values.valueOf(value.toUpperCase());
         }
 
         public Status toStatus() {
