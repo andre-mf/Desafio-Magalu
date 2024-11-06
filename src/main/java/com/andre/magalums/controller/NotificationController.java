@@ -2,7 +2,6 @@ package com.andre.magalums.controller;
 
 import com.andre.magalums.controller.dto.ScheduleNotificationDto;
 import com.andre.magalums.entity.Notification;
-import com.andre.magalums.repository.NotificationRepository;
 import com.andre.magalums.service.NotificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class NotificationController {
 
     private final NotificationService notificationService;
-    private final NotificationRepository notificationRepository;
 
-    public NotificationController(NotificationService notificationService, NotificationRepository notificationRepository) {
+    public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
-        this.notificationRepository = notificationRepository;
     }
 
     @PostMapping
